@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import _ from 'lodash'
 import './App.css'
 import schema from './data/schema.json'
 import Sidebar from './components/Sidebar.js'
@@ -8,16 +9,34 @@ class App extends Component {
   constructor() {
     super()
 
+    // Create an object for individual properties
+    const generalInfo = {
+        name: 'General Info',
+        properties: _.filter(schema, o => {
+          // Returns all of the objects without children properties
+          return (typeof o.properties === 'undefined' || o.properties.length === 0)
+        })
+    }
+
+    // Concatenate general fields with those that have parents
+    const fieldGroups = [
+      generalInfo, 
+      ..._.filter(schema, o => {
+        return (o.properties && o.properties.length > 0)
+      })
+    ]
+
+    // Initialize state
     this.state = { 
-      schema: schema,
+      fieldGroups: fieldGroups,
       activeTab: null,
     }
   }
+
   render() {
-    console.log("schema: ", this.state.schema)
     return (
       <div className="container">
-        <Sidebar />
+        <Sidebar fieldGroups={this.state.fieldGroups} />
         <FieldGroupDetail />
       </div>
     )
