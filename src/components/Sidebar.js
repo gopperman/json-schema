@@ -8,7 +8,7 @@ class Sidebar extends Component {
     super()
 
     this.state = {
-      activeTab: 0,
+      activeTab: null,
     }
 
   }
