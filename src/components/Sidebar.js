@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 class Sidebar extends Component {
   render() {
+    console.log(this.props.fieldGroups);
     return (
       <div className="sidebar flex-one">
         <h2 className="sidebar__header">Field Groups</h2>
@@ -32,6 +33,10 @@ class Sidebar extends Component {
       </div>
     )
   }
+}
+
+Sidebar.propTypes = {
+  fieldGroups: PropTypes.object.isRequired,
 }
 
 export default Sidebar
