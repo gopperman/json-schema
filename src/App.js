@@ -40,7 +40,7 @@ class App extends Component {
     return (
       <div className="container">
         <Sidebar fieldGroups={this.state.fieldGroups} />
-        <FieldGroupDetail />
+        <FieldGroupDetail fieldGroups={this.state.fieldGroups} />
       </div>
     )
   }

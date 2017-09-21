@@ -1,27 +1,24 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import FieldList from './FieldList.js'
 
 class FieldGroupDetail extends Component {
   render() {
+    const {fieldGroups} = this.props
+
+    // Just grab the first one for now
+    const group = fieldGroups[0]
     return (
       <div className="group-detail flex-three">
-      	<h2 className="group-detail__header">General Info</h2>
-        <ul className="field-list">
-        	<li className="field-item" id="1">
-        		<h3 className="field-item__name">Field Name</h3>
-        		<p>Type: </p>
-        		<p>Usage: </p>
-        		<p>EverTrue Field Name: </p>
-        	</li>
-        	<li className="field-item" id="1">
-        		<h3 className="field-item__name">Field Name</h3>
-        		<p>Type: </p>
-        		<p>Usage: </p>
-        		<p>EverTrue Field Name: </p>
-        	</li>
-        </ul>
+      	<h2 className="group-detail__header">{group.name}</h2>
+        <FieldList fields={group.properties} />
       </div>
     )
   }
+}
+
+FieldGroupDetail.propTypes = {
+  fieldGroups: PropTypes.array.isRequired,
 }
 
 export default FieldGroupDetail
