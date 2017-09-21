@@ -1,0 +1,16 @@
+@import './colors.scss';
+
+$module: 'field-item';
+
+.#{$module} {
+	background: $white;
+	border: 1px solid $gray;
+	border-radius: 4px;
+	margin: 20px 0;
+	padding: 15px;
+
+	&__name {
+		color: darken($blue, 25%);
+		margin: .5rem 0;
+	}
+}

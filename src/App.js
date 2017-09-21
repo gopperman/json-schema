@@ -1,21 +1,27 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import './App.css'
+import schema from './data/schema.json'
+import Sidebar from './components/Sidebar.js'
+import FieldGroupDetail from './components/FieldGroupDetail.js'
 
 class App extends Component {
+  constructor() {
+    super()
+
+    this.state = { 
+      schema: schema,
+      activeTab: null,
+    }
+  }
   render() {
+    console.log("schema: ", this.state.schema)
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container">
+        <Sidebar />
+        <FieldGroupDetail />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

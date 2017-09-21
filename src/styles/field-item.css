@@ -1,0 +1,9 @@
+.field-item {
+  background: #ffffff;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  margin: 20px 0;
+  padding: 15px; }
+  .field-item__name {
+    color: #087aa0;
+    margin: .5rem 0; }

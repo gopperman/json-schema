@@ -1,0 +1,94 @@
+@import './colors.scss';
+
+$module: 'sidebar';
+$spacer: 10px;
+
+.#{$module} {
+	background: $gray-light;
+	border-radius: 2px;
+
+	&__header {
+		background: darken($green, 20%);
+		color: $white;
+		font-size: 1.2rem;
+		margin: 0;
+		padding: $spacer;
+	}
+
+	&__subhed {
+		color: $blue;
+		font-size: 1rem;
+		margin: 0;
+
+		&:hover {
+			cursor: hand;
+			cursor: pointer;
+		}
+
+		&--active {
+			color: $gray-dark;
+		}
+
+		// Expanded accordion state
+		&--active + .#{$module}__accordion {
+			max-height: 9999px;
+		}
+	}
+
+	// Collapsed accordion state
+	&__accordion {
+		max-height: 0;
+		overflow: hidden;
+	}
+
+	&__group {
+		background: $white;
+		margin: 0;
+		padding: $spacer;
+		border-bottom: 1px solid $gray;
+	}
+
+	&__link {
+		color: $gray-mid;
+		display: inline-block;
+		font-size: .9rem;
+		height: 1.6rem;
+		margin: .25rem 0;
+		text-decoration: none;
+		transition: color, .2s;
+
+		&:hover, &:active, &:focus {
+			color: $blue;
+
+			&:before {
+				background: $blue;
+			}
+		}
+
+		&:before {
+			background: $gray-mid;
+			content: "";
+			display: inline-block;
+			margin: 0 5px;
+			height: 1.6rem;
+			position: relative;
+			top: .4rem;
+			transition: background, .2s;
+			width: 5px;
+		}
+
+		&--active {
+			color: $red;
+
+			&:before {
+				background: $red;
+			}
+		}
+	}
+}
+
+@media only screen and (min-width: 768px) {
+	.#{$module} {
+		border-right: 1px solid $gray;
+	}
+}

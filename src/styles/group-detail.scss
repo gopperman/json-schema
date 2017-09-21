@@ -1,0 +1,13 @@
+@import './colors.scss';
+
+$module: 'group-detail';
+
+.#{$module} {
+	background: $gray-light;
+	padding: 0 15px;
+
+	&__header {
+		color: darken($blue, 25%);
+		margin: .5rem 0;
+	}
+}
