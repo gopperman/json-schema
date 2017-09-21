@@ -12,24 +12,27 @@ class App extends Component {
     // Create an object for individual properties
     const generalInfo = {
         name: 'General Info',
+        id: 0,
         properties: _.filter(schema, o => {
           // Returns all of the objects without children properties
           return (typeof o.properties === 'undefined' || o.properties.length === 0)
         })
     }
 
+    // Create an array of fields with parents
+    const childFields = _.filter(schema, o => {
+      return (o.properties && o.properties.length > 0)
+    })
+
     // Concatenate general fields with those that have parents
-    const fieldGroups = [
+    const fieldGroups = generalInfo.properties.length ? [
       generalInfo, 
-      ..._.filter(schema, o => {
-        return (o.properties && o.properties.length > 0)
-      })
-    ]
+      ...childFields
+    ] : childFields
 
     // Initialize state
     this.state = { 
       fieldGroups: fieldGroups,
-      activeTab: null,
     }
   }
 

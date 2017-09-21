@@ -26,6 +26,9 @@
     margin: 0;
     padding: 10px;
     border-bottom: 1px solid #dedede; }
+  .sidebar__item:hover {
+    cursor: hand;
+    cursor: pointer; }
   .sidebar__link {
     color: #999999;
     display: inline-block;

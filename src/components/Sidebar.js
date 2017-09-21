@@ -1,34 +1,36 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import _ from 'lodash'
+import SidebarGroup from './SidebarGroup.js'
 
 class Sidebar extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      activeTab: 0,
+    }
+
+  }
+
   render() {
-    console.log(this.props.fieldGroups);
+    const groups = this.props.fieldGroups.map(o => {
+      const isActive = typeof o.id !== 'undefined' ? (o.id === this.state.activeTab) : false
+
+      return (
+        <SidebarGroup 
+          key={_.uniqueId('sidebarGroup')} 
+          group={o} 
+          active={isActive} 
+        />
+      )
+    })
+
     return (
       <div className="sidebar flex-one">
         <h2 className="sidebar__header">Field Groups</h2>
         <ul className="sidebar__group-list">
-          <li className="sidebar__group">
-            <h3 className="sidebar__subhed sidebar__subhed--active">Field Group Name</h3>
-            <ul className="sidebar__accordion">
-              <li>
-                <a href="#" className="sidebar__link sidebar__link--active">Foo</a>
-              </li>
-              <li>
-                <a href="#" className="sidebar__link sidebar__link">Bar</a>
-              </li>
-            </ul>
-          </li>
-          <li className="sidebar__group">
-            <h3 className="sidebar__subhed sidebar__subhed">Field Group Name 2</h3>
-            <ul className="sidebar__accordion">
-              <li>
-                <a href="#" className="sidebar__link sidebar__link--active">Foo</a>
-              </li>
-              <li>
-                <a href="#" className="sidebar__link sidebar__link">Bar</a>
-              </li>
-            </ul>
-          </li>
+          {groups}
         </ul>
       </div>
     )
@@ -36,7 +38,7 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  fieldGroups: PropTypes.object.isRequired,
+  fieldGroups: PropTypes.array.isRequired,
 }
 
 export default Sidebar

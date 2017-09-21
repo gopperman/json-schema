@@ -48,6 +48,13 @@ $spacer: 10px;
 		border-bottom: 1px solid $gray;
 	}
 
+	&__item {
+		&:hover {
+			cursor: hand;
+			cursor: pointer;
+		}
+	}
+
 	&__link {
 		color: $gray-mid;
 		display: inline-block;
