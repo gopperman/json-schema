@@ -7,7 +7,6 @@ function FieldList(props) {
   const {fields} = props
 
   const fieldItems = fields.map(o => {
-    console.log(o)
     return (<FieldItem item={o} key={_.uniqueId('field-item_')} />)
   })
 
