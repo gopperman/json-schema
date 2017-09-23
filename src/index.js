@@ -11,7 +11,7 @@ import { applySchemaTransformations } from './utils/schemaUtils.js'
 
 const store = createStore(groupReducer, {
 	fieldGroups: applySchemaTransformations(schema),
-	activeField: null,
+	activeField: 3976,
 	activeGroup: 0
 })
 

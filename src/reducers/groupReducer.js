@@ -17,7 +17,7 @@ const groupReducer = (state={
 		case SHOW_FIELD:
 			return {
 				...state,
-				activeField: action.activeField
+				activeField: +action.activeField
 			}
 		default:
 			return state

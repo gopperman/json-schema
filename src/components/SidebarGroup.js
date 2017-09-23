@@ -9,7 +9,6 @@ class Sidebar extends Component {
 
     this.state = {
       active: _.get(this, 'props.active', false),
-      activeLink: null,
     }
 
     this.toggleAccordion = this.toggleAccordion.bind(this)
@@ -39,14 +38,12 @@ class Sidebar extends Component {
   render() {
 
     const {group, active} = this.props
-    const {activeLink} = this.state
     const subhedClass = `sidebar__subhed ${active ? 'sidebar__subhed--active' : ''}`
 
     const fields = group.properties.map(o => {
       return (
         <li className='sidebar__item' onClick={this.linkClick} key={_.uniqueId('sidebarItem')}>
           <SidebarLink 
-          active={activeLink === o.id} 
           id={o.id}
           name={o.name}  
           />

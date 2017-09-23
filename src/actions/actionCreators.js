@@ -8,10 +8,12 @@ const loadGroup = (activeGroup=null) => ({
 	activeGroup
 })
 
-const showField = (activeField=null) => ({
-	type: SHOW_FIELD,
-	activeField
-})
+const showField = (activeField=null) => {
+	return {
+		type: SHOW_FIELD,
+		activeField
+	}
+}
 
 export {
 	loadGroup,

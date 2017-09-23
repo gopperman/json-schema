@@ -1,18 +1,39 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {Component} from 'react'
+import {connect} from 'react-redux'
+import { showField } from '../actions/actionCreators.js'
 
-function SidebarLink(props) {
-	const {active, id, name} = props
-	const linkClass = `sidebar__link ${active ? 'sidebar__link--active' : ''}`
+class SidebarLink extends Component {
+	activateLink = (event) => {
+		this.props.activateLink(event.target.getAttribute('data-id'))
+	}
 
-	return (
-			<a href={`#field-item__${id}`} className={linkClass}>{name}</a>
-	)
+	render() {
+		const {activeField, id, name} = this.props
+		const active = activeField === id
+		console.log(id,activeField)
+		const linkClass = `sidebar__link ${active ? 'sidebar__link--active' : ''}`
+
+		return (
+				<a href={`#field-item__${id}`}
+					className={linkClass}
+					data-id={id}
+					onClick={this.activateLink}
+				>
+					{name}
+				</a>
+		)
+	}
 }
 
-SidebarLink.propTypes = {
-	active: PropTypes.bool.isRequired,
-	id: PropTypes.number.isRequired,
-	name: PropTypes.string.isRequired,
+const mapStateToProps = (state) => ({
+  activeField: state.activeField
+});
+
+const mapDispatchToProps = (dispatch) => {
+	return({
+		activateLink: (id) => {
+			dispatch(showField(id))
+		}
+	})
 }
-export default SidebarLink
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarLink);
