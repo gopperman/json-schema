@@ -4,13 +4,12 @@ import { showField } from '../actions/actionCreators.js'
 
 class SidebarLink extends Component {
 	activateLink = (event) => {
-		this.props.activateLink(event.target.getAttribute('data-id'))
+		this.props.activateLink(+event.target.getAttribute('data-id'))
 	}
 
 	render() {
 		const {activeField, id, name} = this.props
 		const active = activeField === id
-		console.log(id,activeField)
 		const linkClass = `sidebar__link ${active ? 'sidebar__link--active' : ''}`
 
 		return (
@@ -27,7 +26,7 @@ class SidebarLink extends Component {
 
 const mapStateToProps = (state) => ({
   activeField: state.activeField
-});
+})
 
 const mapDispatchToProps = (dispatch) => {
 	return({
@@ -36,4 +35,5 @@ const mapDispatchToProps = (dispatch) => {
 		}
 	})
 }
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarLink);
+
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarLink)

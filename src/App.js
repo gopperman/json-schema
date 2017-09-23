@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar.js'
 import FieldGroupDetail from './components/FieldGroupDetail.js'
 
 class App extends Component {
-  
+
   render() {
 
     const group = _.find(this.props.fieldGroups, (o) => {

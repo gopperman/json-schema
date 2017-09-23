@@ -1,15 +1,12 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import _ from 'lodash'
 import SidebarLink from './SidebarLink.js'
+import { loadGroup } from '../actions/actionCreators.js'
 
-class Sidebar extends Component {
+class SidebarGroup extends Component {
   constructor() {
     super()
-
-    this.state = {
-      active: _.get(this, 'props.active', false),
-    }
 
     this.toggleAccordion = this.toggleAccordion.bind(this)
   }
@@ -20,17 +17,7 @@ class Sidebar extends Component {
    * @return {void}
    */
   toggleAccordion(event) {
-    const {active} = this.state
-    const activeClass = 'sidebar__subhed--active'
-    if (active) {
-      event.target.classList.remove(activeClass)
-    } else {
-      event.target.classList.add(activeClass)
-    }
-    // Flip the state. #TODO Redux removes the need for this
-    this.setState({
-      active: !active
-    })
+    this.props.loadGroupFields(+event.target.getAttribute('data-id'))
   }
 
 
@@ -53,7 +40,11 @@ class Sidebar extends Component {
     })
     return (
       <li className="sidebar__group">
-        <h3 className={subhedClass} onClick={this.toggleAccordion}>{group.name}</h3>
+        <h3 className={subhedClass}
+          onClick={this.toggleAccordion}
+          data-id={group.id}>
+          {group.name}
+        </h3>
         <ul className="sidebar__accordion">
           {fields}
         </ul>
@@ -62,9 +53,16 @@ class Sidebar extends Component {
   }
 }
 
-Sidebar.propTypes = {
-  group: PropTypes.object.isRequired,
-  active: PropTypes.bool.isRequired,
+const mapStateToProps = (state) => ({
+  activeGroup: state.activeGroup
+})
+
+const mapDispatchToProps = (dispatch) => {
+  return({
+    loadGroupFields: (id) => {
+      dispatch(loadGroup(id))
+    }
+  })
 }
 
-export default Sidebar
+export default connect(mapStateToProps, mapDispatchToProps)(SidebarGroup)
