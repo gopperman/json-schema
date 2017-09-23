@@ -1,9 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function FieldItem(props) {
-    const {item} = props
-
+function FieldItem({item}) {
     const appKeys = item.app_keys.reduce((accumulator, currentVal) => {
         return `${accumulator}, ${currentVal}`
     }, '').substring(2)

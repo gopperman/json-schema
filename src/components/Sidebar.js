@@ -1,21 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
 import _ from 'lodash'
 import SidebarGroup from './SidebarGroup.js'
+import { loadGroup } from '../actions/actionCreators.js'
 
 class Sidebar extends Component {
-  constructor() {
-    super()
-
-    this.state = {
-      activeTab: null,
-    }
-
-  }
-
   render() {
+
     const groups = this.props.fieldGroups.map(o => {
-      const isActive = typeof o.id !== 'undefined' ? (o.id === this.state.activeTab) : false
+      const isActive = typeof o.id !== 'undefined' ? (o.id === this.props.activeGroup) : false
 
       return (
         <SidebarGroup 
@@ -37,8 +30,9 @@ class Sidebar extends Component {
   }
 }
 
-Sidebar.propTypes = {
-  fieldGroups: PropTypes.array.isRequired,
-}
+const mapStateToProps = (state) => ({
+  fieldGroups: state.fieldGroups,
+  activeGroup: state.activeGroup
+});
 
-export default Sidebar
+export default connect(mapStateToProps)(Sidebar);

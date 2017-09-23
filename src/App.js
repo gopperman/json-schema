@@ -1,49 +1,30 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import _ from 'lodash'
 import './App.css'
-import schema from './data/schema.json'
 import Sidebar from './components/Sidebar.js'
 import FieldGroupDetail from './components/FieldGroupDetail.js'
 
 class App extends Component {
-  constructor() {
-    super()
-
-    // Create an object for individual properties
-    const generalInfo = {
-        name: 'General Info',
-        id: 0,
-        properties: _.filter(schema, o => {
-          // Returns all of the objects without children properties
-          return (typeof o.properties === 'undefined' || o.properties.length === 0)
-        })
-    }
-
-    // Create an array of fields with parents
-    const childFields = _.filter(schema, o => {
-      return (o.properties && o.properties.length > 0)
-    })
-
-    // Concatenate general fields with those that have parents
-    const fieldGroups = generalInfo.properties.length ? [
-      generalInfo, 
-      ...childFields
-    ] : childFields
-
-    // Initialize state
-    this.state = { 
-      fieldGroups: fieldGroups,
-    }
-  }
 
   render() {
+
+    const group = _.find(this.props.fieldGroups, (o) => {
+      return o.id === this.props.activeGroup
+    })
+
     return (
       <div className="container">
-        <Sidebar fieldGroups={this.state.fieldGroups} />
-        <FieldGroupDetail fieldGroups={this.state.fieldGroups} />
+        <Sidebar />
+        <FieldGroupDetail group={group} />
       </div>
     )
   }
 }
 
-export default App
+const mapStateToProps = (state) => ({
+  fieldGroups: state.fieldGroups,
+  activeGroup: state.activeGroup
+});
+
+export default connect(mapStateToProps)(App);
